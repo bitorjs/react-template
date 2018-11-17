@@ -1,22 +1,29 @@
 import D from '../../react-inject/decorators';
 
-import Demo from '../view/demo';
 import Index from '../view/index';
+import Person from '../view/person';
+import notFount from '../view/404';
 
-@D.namespace('/order')
-export default class {
+@D.namespace('/')
+class IndexController {
   constructor(ctx) {
     this.ctx = ctx;
   }
 
   @D.Get('/')
   index() {
-    console.log('@@@')
-    this.ctx.render(Demo)
+    this.ctx.render(Index)
+  }
+
+  @D.Get('/person/:userid')
+  person() {
+    this.ctx.render(Person)
   }
 
   @D.Get('*')
-  defaul() {
-    this.ctx.render(Index)
+  notFount() {
+    this.ctx.render(notFount)
   }
 }
+
+export default IndexController;

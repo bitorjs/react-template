@@ -3,7 +3,26 @@
 
 ### React 运行时构建
 ```
+react 并不推荐在原型上扩展
+React.Component.prototype.$store = $store;
+react 是更纯粹的，函数式的。HOC的模式
+将你的方法挂载到prototype是非常不纯的操作。
 
+
+React获取组件实例
+1. 直接new Component()
+
+组件本身也是class，可以new，这样的组件实例意义不大
+
+componentInstance = new Component();
+2. ReactDOM.render返回组件实例(React新版本已失效，返回null)
+
+componentInstance = ReactDOM.render(<Component />, div);
+3. ref回调函数返回组件实例(React新版本可用)
+
+let componentInstance;
+
+ReactDOM.render(<Component ref={(com) => componentInstance = com} />，div>)
 // 1. 这两个导入时候，接收的成员名称，必须这么写
 import React from 'react' // 创建组件、虚拟dom元素，生命周期
 import {

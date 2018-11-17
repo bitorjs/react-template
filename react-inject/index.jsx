@@ -12,17 +12,25 @@ class ReactApplication extends Application {
     super()
 
     this.ctx.render = (webview, props) => {
+      // if (this.$react) {
       this.$react.webview = webview;
       this.$react.webviewprops = props;
       this.$react.setState({
         update: true
       })
+      // } else {
+      //   setTimeout(() => {
+      //     this.ctx.render(webview, props)
+      //   }, 100)
+      // }
+
     }
 
     this.use((ctx, next) => {
       let routes = this.$route.match(ctx.url);
       console.log(routes)
       if (routes[0]) {
+        ctx.params = routes[0].params;
         routes[0].handle()
       }
       next()
@@ -31,9 +39,15 @@ class ReactApplication extends Application {
     })
   }
 
-  mountVue() { }
+  mountReact() {
+    // React.Component.prototype = this;
+    React.Component.prototype.$bitor = this;
+    React.Component.prototype.reload = this.reload;
+    React.Component.prototype.replace = this.replace;
+    React.Component.prototype.redirect = this.redirect.bind(this);
+  }
 
-  createVueRoot(rootElementId, rootComponent) {
+  createReactRoot(rootElementId, rootComponent) {
     const that = this;
     class RootElement extends React.Component {
       constructor(props) {
@@ -50,14 +64,14 @@ class ReactApplication extends Application {
     }
 
     const Root = rootComponent ? rootComponent : RootElement;
-    ReactDOM.render(<Root>
-      {rootComponent ? <RootElement></RootElement> : null}
-    </Root>, document.getElementById(rootElementId));
+
+    ReactDOM.render(<Root>{rootComponent ? (<RootElement></RootElement>) : null}</Root>, document.getElementById(rootElementId));
   }
 
   start(client, rootElementId, rootComponent) {
+    this.mountReact();
     rootElementId = rootElementId || "root"
-    this.createVueRoot(rootElementId, rootComponent)
+    this.createReactRoot(rootElementId, rootComponent)
     this.registerPlugin(client)
     this.emit('ready');
     this.startServer()

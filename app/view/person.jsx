@@ -13,7 +13,7 @@ export default class extends Component {
     return (
       <PageRootContainer>
         <PageContainer>
-          <div onClick={() => { this.redirect('/order') }}>To Order</div>
+          <div>个人中心</div>
         </PageContainer>
       </PageRootContainer>
     )

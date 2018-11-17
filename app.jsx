@@ -1,6 +1,7 @@
+import 'normalize.css';
 import ReactApplication from './react-inject';
 import classloader from './.classloader'
-import App from './app/view/App'
+import start from './app/view/start'
 
 let client = app => {
   app.on('ready', () => {
@@ -14,4 +15,4 @@ let client = app => {
   })
 }
 
-new ReactApplication().start(client, null, App);
+new ReactApplication().start(client, null, start);

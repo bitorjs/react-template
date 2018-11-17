@@ -7,13 +7,14 @@ import './styles/index.less'
 export default class extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
   }
 
   render() {
     return (
       <PageRootContainer>
         <PageContainer>
-          <div onClick={() => { this.redirect('/order') }}>To Order</div>
+          详情 - {this.props.id}
         </PageContainer>
       </PageRootContainer>
     )

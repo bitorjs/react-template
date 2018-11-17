@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PageContainer from '../components/page-container';
 import PageRootContainer from '../components/page-root-container';
 
-import './styles/index.less'
+import './styles/404.less'
 
 export default class extends Component {
   constructor(props) {
@@ -13,7 +13,9 @@ export default class extends Component {
     return (
       <PageRootContainer>
         <PageContainer>
-          <div onClick={() => { this.redirect('/order') }}>To Order</div>
+          <center>
+            <img className="img" src="/assets/404.jpg" alt="" />
+          </center>
         </PageContainer>
       </PageRootContainer>
     )

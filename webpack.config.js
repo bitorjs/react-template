@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const htmlPlugin = require('html-webpack-plugin');
-const BitorPlugin = require('../application/webpack-watcher');
+const BitorPlugin = require('../watcher-webpack-plugin');
 
 var path = require('path');
 
@@ -69,16 +69,6 @@ module.exports = {
     ignored: [require('path').resolve(__dirname, './dist/**/*.*'), 'node_modules']
   },
   resolve: {
-    // modules:[
-    //   // path.resolve( "./"), 
-    //   path.resolve( "./node_modules"), 
-    //   // path.resolve('../router'),
-    //   // path.resolve('../router/node_modules'),
-    //   // path.resolve('../application'),
-    //   // path.resolve('../application/node_modules'),
-    //   // path.resolve('../HashHistory'),
-    //   // path.resolve('../HashHistory/node_modules'),
-    // ],
     extensions: ['.js', '.jsx', '.json'],
   },
 
@@ -90,8 +80,8 @@ module.exports = {
         // cacheDirectory: true, // for faster rebuild
       },
       {
-        test: /\.less$/,
-        use: ['css-loader', 'less-loader']
+        test: /\.(le|c)ss$/,
+        use: ['style-loader', 'css-loader', 'less-loader']
       }
     ]
   }
