@@ -65,7 +65,7 @@ class ReactApplication extends Application {
 
     const Root = rootComponent ? rootComponent : RootElement;
 
-    ReactDOM.render(<Root>{rootComponent ? (<RootElement></RootElement>) : null}</Root>, document.getElementById(rootElementId));
+    ReactDOM.render(<Root>{rootComponent ? (<RootElement></RootElement>) : null}</Root>, document.querySelector(rootElementId));
   }
 
   start(client, rootElementId, rootComponent) {
