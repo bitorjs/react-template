@@ -16,18 +16,19 @@ module.exports = WebpackMerge(base, {
     filename: 'build.min.js',
     path: path.resolve(cwd, 'dist'),
   },
-  optimization: {
-    minimizer: [
-      // new UglifyJsPlugin({
-      //   cache: true,
-      //   parallel: true,
-      //   sourceMap: true
-      // }),
-      new OptimizeCSSAssetsPlugin({}) // use OptimizeCSSAssetsPlugin
-    ]
-  },
+  // optimization: {
+  //   minimizer: [
+  //     // new UglifyJsPlugin({
+  //     //   cache: true,
+  //     //   parallel: true,
+  //     //   sourceMap: true
+  //     // }),
+  //     new OptimizeCSSAssetsPlugin({}) // use OptimizeCSSAssetsPlugin
+  //   ]
+  // },
   plugins: [
     // watcherPlugin,
+    new OptimizeCSSAssetsPlugin(),
     new MiniCssExtractPlugin({
       filename: 'app.min.css'
     })
