@@ -25,8 +25,8 @@ export default class extends Component {
             {
               this.state.list.map((data, index) => {
                 return (
-                  <div className="item">
-                    <p onClick={() => { this.redirect('/order/detail/' + data.id) }} key={data.id}>{data.name}</p>
+                  <div className="item" key={data.id}>
+                    <p onClick={() => { this.redirect('/order/detail/' + data.id) }}>{data.name}</p>
                   </div>
                 )
               })
