@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import React from 'react' // 创建组件、虚拟dom元素，生命周期
 import ReactDOM from 'react-dom' // 把创建好的组件和虚拟dom放到页面上展示的
 import metakeys from './metakeys';
-import Application from '../../application/Application'
+import Application from 'bitorjs-application';
 
 
 
