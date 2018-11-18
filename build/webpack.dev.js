@@ -17,6 +17,15 @@ module.exports = WebpackMerge(base, {
     new webpack.HotModuleReplacementPlugin(),
     watcherPlugin,
   ],
+  module: {
+    rules: [{
+      test: /\.(le|c)ss$/,
+      use: [
+        'style-loader',
+        'css-loader', 'less-loader'
+      ]
+    }, ]
+  },
   devServer: {
     contentBase: path.join(cwd, 'dist'),
     open: true,

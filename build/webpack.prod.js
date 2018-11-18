@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const WebpackMerge = require('webpack-merge');
 const base = require('./webpack.base');
-const watcherPlugin = require('./watcher.config');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -16,16 +15,15 @@ module.exports = WebpackMerge(base, {
     filename: 'build.min.js',
     path: path.resolve(cwd, 'dist'),
   },
-  // optimization: {
-  //   minimizer: [
-  //     // new UglifyJsPlugin({
-  //     //   cache: true,
-  //     //   parallel: true,
-  //     //   sourceMap: true
-  //     // }),
-  //     new OptimizeCSSAssetsPlugin({}) // use OptimizeCSSAssetsPlugin
-  //   ]
-  // },
+  module: {
+    rules: [{
+      test: /\.(le|c)ss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader', 'less-loader'
+      ]
+    }]
+  },
   plugins: [
     // watcherPlugin,
     new OptimizeCSSAssetsPlugin(),

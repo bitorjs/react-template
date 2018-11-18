@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --config ./build/webpack.dev.js --watch --color --progress",
-    "dev": "webpack --config ./build/webpack.dev.js --watch --progress --color",
-    "build": "webpack --config ./build/webpack.prod.js --progress --color"
+    "start": "webpack-dev-server --mode=development --config ./build/webpack.dev.js --watch --color --progress",
+    "dev": "webpack --mode=development --config ./build/webpack.dev.js --watch --progress --color",
+    "build": "webpack --mode=production --config ./build/webpack.prod.js --progress --color"
   },
   "repository": {
     "type": "git",

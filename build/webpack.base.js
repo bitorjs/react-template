@@ -1,11 +1,13 @@
 const webpack = require('webpack');
 const htmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
-
 
 var path = require('path');
 const cwd = process.cwd();
+
+
 
 module.exports = {
   plugins: [
@@ -28,12 +30,7 @@ module.exports = {
     rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
-        // cacheDirectory: true, // for faster rebuild
-      },
-      {
-        test: /\.(le|c)ss$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        loader: "babel-loader"
       },
       {
         test: /\.(jpe?g|png|gif)$/,
