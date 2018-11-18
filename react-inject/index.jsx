@@ -31,7 +31,7 @@ class ReactApplication extends Application {
       console.log(routes)
       if (routes[0]) {
         ctx.params = routes[0].params;
-        routes[0].handle()
+        routes[0].handle(routes[0].params)
       }
       next()
     }).use(function (ctx, dispatch) {
@@ -45,6 +45,19 @@ class ReactApplication extends Application {
     React.Component.prototype.reload = this.reload;
     React.Component.prototype.replace = this.replace;
     React.Component.prototype.redirect = this.redirect.bind(this);
+    this.requestMethod();
+  }
+
+  requestMethod() {
+    ['get', 'post', 'delete', 'put'].forEach((method) => {
+      this.ctx[method] = React.Component.prototype[method] = (url) => {
+        let routes = this.$route.match(url, method);
+        console.log(routes)
+        if (routes[0]) {
+          return routes[0].handle(routes[0].params)
+        }
+      }
+    })
   }
 
   createReactRoot(rootElementId, rootComponent) {
@@ -70,7 +83,7 @@ class ReactApplication extends Application {
 
   start(client, rootElementId, rootComponent) {
     this.mountReact();
-    rootElementId = rootElementId || "root"
+    rootElementId = rootElementId || "#root"
     this.createReactRoot(rootElementId, rootComponent)
     this.registerPlugin(client)
     this.emit('ready');
