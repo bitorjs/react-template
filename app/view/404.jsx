@@ -7,6 +7,8 @@ import './styles/404.less'
 export default class extends Component {
   constructor(props) {
     super(props);
+
+    console.log(this.store, this.$Store)
   }
 
   render() {

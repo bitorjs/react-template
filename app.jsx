@@ -39,6 +39,11 @@ let client = app => {
         app.registerController(c);
       }
     }
+
+    app.store.$Test = {
+      list: [],
+      name: ''
+    }
   })
 }
 
