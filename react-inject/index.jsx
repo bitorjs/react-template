@@ -4,6 +4,7 @@ import React from 'react' // 创建组件、虚拟dom元素，生命周期
 import ReactDOM from 'react-dom' // 把创建好的组件和虚拟dom放到页面上展示的
 import metakeys from './metakeys';
 import Application from 'bitorjs-application';
+import Store from '../../store';
 
 
 
@@ -41,6 +42,9 @@ class ReactApplication extends Application {
 
   mountReact() {
     // React.Component.prototype = this;
+    this.store = new Store('app', '$');
+    React.Component.prototype.store = this.store;
+    React.Component.prototype.$store = this.store;
     React.Component.prototype.$bitor = this;
     React.Component.prototype.reload = this.reload;
     React.Component.prototype.replace = this.replace;
