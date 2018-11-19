@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import metakeys from './metakeys';
 import Application from 'bitorjs-application';
-import Store from '../../store';
+import Store from 'bitorjs-store';
 
 
 
