@@ -24,9 +24,9 @@ class IndexController {
   }
 
   @D.Post('/person/:userid')
-  person(params) {
+  async person(params) {
     let userid = params.userid;
-    return userid;
+    return await userid;
   }
 
   @D.Delete('/detail')

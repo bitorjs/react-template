@@ -29,9 +29,10 @@ class ReactApplication extends Application {
     this.use((ctx, next) => {
       let routes = this.$route.match(ctx.url);
       console.log(routes)
-      if (routes[0]) {
-        ctx.params = routes[0].params;
-        routes[0].handle(routes[0].params)
+      let route = routes[0];
+      if (route) {
+        ctx.params = route.params;
+        route.handle(route.params)
       }
       next()
     }).use(function (ctx, dispatch) {
@@ -56,8 +57,11 @@ class ReactApplication extends Application {
       this.ctx[method] = React.Component.prototype[method] = (url) => {
         let routes = this.$route.match(url, method);
         console.log(routes)
-        if (routes[0]) {
-          return routes[0].handle(routes[0].params)
+        let route = routes[0];
+        if (route && !route.regexp.fast_star) {
+          return route.handle(route.params)
+        } else {
+          return null;
         }
       }
     })
