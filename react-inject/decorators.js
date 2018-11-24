@@ -1,7 +1,7 @@
 require('reflect-metadata');
 const metakeys = ["namespace", "Get", "Post", "Delete", "Put", "Head"];
 
-module.exports[keys] = metakeys;
+module.exports["methods"] = metakeys.slice(1).map(item => item.toLowerCase());
 
 metakeys.map(key => {
   module.exports[key] = (path) => (target, name, descriptor) => {

@@ -4,6 +4,7 @@ import decorators from './decorators';
 import Application from 'bitorjs-application';
 import Store from 'bitorjs-store';
 
+
 export default class extends Application {
   constructor() {
     super()
@@ -34,7 +35,7 @@ export default class extends Application {
   }
 
   mountRequest() {
-    ['get', 'post', 'delete', 'put'].forEach((method) => {
+    decorators.methods.forEach((method) => {
       this.ctx[method] = React.Component.prototype[method] = (url) => {
         let routes = this.$route.match(url, method);
         console.log(routes)
@@ -49,7 +50,6 @@ export default class extends Application {
   }
 
   createReactRoot(rootElementId, rootComponent) {
-    const that = this;
     this.ctx.render = (webview, props) => {
       this.$react.webview = webview;
       this.$react.webviewprops = props;
@@ -57,22 +57,25 @@ export default class extends Application {
         __update__: true
       })
     }
-    class RootElement extends React.Component {
+
+    const RootElement = this.createRootElement(this);
+    const Root = rootComponent ? rootComponent : RootElement;
+    ReactDOM.render(<Root>{rootComponent ? (<RootElement></RootElement>) : null}</Root>, document.querySelector(rootElementId));
+  }
+
+  createRootElement(app) {
+    return class RootElement extends React.Component {
       constructor(props) {
         super(props);
         this.webview = null;
         this.webviewprops = {}
         this.count = 0;
-        that.$react = this;
+        app.$react = this;
       }
       render() {
-        console.log(this.count++)
         return this.webview ? React.Children.only(React.createElement(this.webview, this.webviewprops)) : ''
       }
     }
-
-    const Root = rootComponent ? rootComponent : RootElement;
-    ReactDOM.render(<Root>{rootComponent ? (<RootElement></RootElement>) : null}</Root>, document.querySelector(rootElementId));
   }
 
   start(client, rootElementId, rootComponent) {
@@ -85,11 +88,10 @@ export default class extends Application {
     this.emit('after-server');
   }
 
+  registerController(controller) {
+    const instance = new controller(this.ctx)
 
-  registerRoutes(classname) {
-    const c = new classname(this.ctx)
-
-    decorators.iterator(classname, (prefix, subroute) => {
+    decorators.iterator(controller, (prefix, subroute) => {
       let path;
       if (prefix.path && prefix.path.length > 1) { //:   prefix='/'
         subroute.path = subroute.path === '/' ? '(/)?' : subroute.path;
@@ -101,12 +103,8 @@ export default class extends Application {
 
       this.$route.register(path, {
         method: subroute.method.toLowerCase()
-      }, c[subroute.prototype].bind(c))
+      }, instance[subroute.prototype].bind(instance))
     })
-  }
-
-  registerController(controller) {
-    this.registerRoutes(controller)
   }
 
   registerPlugin(plugin) {
