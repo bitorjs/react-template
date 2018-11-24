@@ -1,8 +1,10 @@
-import D from '../../react-inject/decorators';
+import D, { Get } from '../../react-inject/decorators';
 
 import Index from '../view/index';
 import Person from '../view/person';
 import notFount from '../view/404';
+
+console.log(D, Get)
 
 @D.namespace('/')
 class IndexController {
