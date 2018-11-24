@@ -40,7 +40,7 @@ export default class extends Application {
         let routes = this.$route.match(url, method);
         console.log(routes)
         let route = routes[0];
-        if (route && !route.regexp.fast_star) {
+        if (route && !route.params['0']) {
           return route.handle(route.params)
         } else {
           return null;
