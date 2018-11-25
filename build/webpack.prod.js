@@ -1,7 +1,5 @@
-const webpack = require('webpack');
 const WebpackMerge = require('webpack-merge');
 const base = require('./webpack.base');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
