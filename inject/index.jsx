@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import decorators from './decorators';
+import decorators from 'bitorjs-decorators';
 import Application from 'bitorjs-application';
 import Store from 'bitorjs-store';
 

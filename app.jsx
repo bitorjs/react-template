@@ -1,5 +1,5 @@
 import 'normalize.css';
-import ReactApplication from './react-inject';
+import ReactApplication from './inject';
 import classloader from './.classloader'
 import start from './app/view/start'
 import axios from 'axios';

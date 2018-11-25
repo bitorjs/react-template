@@ -1,4 +1,4 @@
-import D, { Get } from '../../react-inject/decorators';
+import D, { Get } from 'bitorjs-decorators';
 
 import Index from '../view/index';
 import Person from '../view/person';

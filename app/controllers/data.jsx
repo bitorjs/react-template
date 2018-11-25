@@ -1,4 +1,4 @@
-import D from '../../react-inject/decorators';
+import D from 'bitorjs-decorators';
 
 @D.namespace('/api')
 class IndexController {

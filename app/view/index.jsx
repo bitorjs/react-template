@@ -12,8 +12,10 @@ export default class extends Component {
     console.log("&&%%%%", this.post("/api/person/45"));
     console.log("&&%%%%", this.delete("/api/detail"));
     this.post("/api/person/45").then(res => {
-      console.log('()', res)
+      console.log('()', res, this)
     })
+
+    console.log(this)
   }
 
   render() {
