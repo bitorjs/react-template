@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bitorjs-application": "^1.0.3",
+    "bitorjs-application": "^1.0.4",
     "bitorjs-decorators": "^1.0.0",
     "bitorjs-store": "^1.0.3",
     "normalize.css": "^8.0.1",
