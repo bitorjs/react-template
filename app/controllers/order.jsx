@@ -24,7 +24,7 @@ class Controller {
   }
 
   //get *
-  @D.Get('*')
+  @D.Get('/*')
   notFount() {
     this.ctx.render(notFount)
   }
