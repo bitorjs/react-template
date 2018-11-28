@@ -49,7 +49,7 @@ module.exports = WebpackMerge(base, {
       test: /\.(le|c)ss$/,
       use: [
         'style-loader',
-        'css-loader', 'less-loader'
+        'css-loader', 'postcss-loader', 'less-loader'
       ]
     }, ]
   },
