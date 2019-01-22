@@ -107,7 +107,80 @@ export default class extends Application {
     })
   }
 
+  registerService(filename, service) {
+    const instance = new service(this.ctx);
+    let name = decorators.getServiceName(service);
+    if (name) {
+      if (_services.indexOf(name) === -1) {
+        _services.push(name)
+        this.ctx.Service = this.ctx.Service || {};
+        this.ctx.Service[name] = instance;
+      } else {
+        throw new Error(`Service [${name}] has been declared`)
+      }
+    } else {
+      if (_services.indexOf(filename) === -1) {
+        _services.push(filename)
+        this.ctx.Service = this.ctx.Service || {};
+        this.ctx.Service[filename] = instance;
+        console.warn('Service ', service, 'use @Service(name)')
+      } else {
+        throw new Error(`Service [${filename}] has been declared`)
+      }
+    }
+  }
+
+  watch(requireContext) {
+    return requireContext.keys().map(key => {
+      console.log(key)
+      let m = requireContext(key);
+      let c = m.default || m;
+      let filename = key.replace(/(.*\/)*([^.]+).*/ig, "$2");
+      if (key.match(/\/filter\/.*\.jsx$/) != null) {
+        this.registerFilter(filename, c)
+      } else if (key.match(/\/middleware\/.*\.jsx$/) != null) {
+        this.registerMiddleware(c)
+      } else if (key.match(/\/controller\/.*\.jsx$/) != null) {
+        this.registerController(c);
+      } else if (key.match(/\/service\/.*\.jsx$/) != null && this.config && this.config.mock !== true) {
+        this.registerService(filename, c);
+      } else if (key.match(/\/mock\/.*\.jsx$/) != null && this.config && this.config.mock === true) {
+        this.registerService(filename, c);
+      } else if (key.match(/\/store\/.*\.jsx$/) != null) {
+        this.registerStore(filename, c);
+      }
+    })
+  }
+
   registerPlugin(plugin) {
+    const modules = [];
+
+    this.config = this.config || {};
+    const configs = require.context('../config', false, /\.js$/)
+    configs.keys().map(key => {
+      let m = configs(key);
+      let c = m.default || m;
+      if (key.match(/\/plugin\.js$/) != null) {
+        c.forEach(item => {
+          if (item.enable === true) modules.push(item);
+        })
+
+      } else if (key.match(/\/development\.js$/) != null) {
+        if (process.env.IS_DEV === true) {
+          this.config = Object.assign(this.config, c)
+        }
+      } else if (key.match(/\/production\.js$/) != null) {
+        if (process.env.IS_DEV === false) {
+          this.config = Object.assign(this.config, c)
+        }
+      } else {
+        console.log(c)
+        this.config = Object.assign(this.config, c)
+      }
+    })
     plugin(this);
+    modules.forEach(m => {
+      m.module(this, m)
+    })
   }
 }

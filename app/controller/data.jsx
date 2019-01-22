@@ -6,6 +6,7 @@ class IndexController {
     this.ctx = ctx;
   }
 
+
   @D.Get('/default')
   index() {
     return [{
