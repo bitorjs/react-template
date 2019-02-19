@@ -1,13 +1,18 @@
-import D from 'bitorjs-decorators';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete
+} from 'bitorjs-decorators';
 
-@D.namespace('/api')
+@Controller('/api')
 class IndexController {
   constructor(ctx) {
     this.ctx = ctx;
   }
 
 
-  @D.Get('/default')
+  @Get('/default')
   index() {
     return [{
       id: 1,
@@ -24,13 +29,13 @@ class IndexController {
     ]
   }
 
-  @D.Post('/person/:userid')
+  @Post('/person/:userid')
   async person(params) {
     let userid = params.userid;
     return await userid;
   }
 
-  @D.Delete('/detail')
+  @Delete('/detail')
   notFount() {
     return [
       1, 2, 3

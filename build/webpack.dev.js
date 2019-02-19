@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const WebpackMerge = require('webpack-merge');
 const base = require('./webpack.base');
-const BitorPlugin = require('bitorjs-watcher');
 
 var path = require('path');
 const cwd = process.cwd();

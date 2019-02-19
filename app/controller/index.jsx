@@ -1,31 +1,30 @@
-import D, { Get } from 'bitorjs-decorators';
-
+import {
+  Controller,
+  Get,
+  Post,
+} from 'bitorjs-decorators';
 import Index from '../view/index';
 import Person from '../view/person';
 import notFount from '../view/404';
 
-console.log(D, Get)
-
-@D.namespace('/')
-class IndexController {
+@Controller('/')
+export default class {
   constructor(ctx) {
     this.ctx = ctx;
   }
 
-  @D.Get('/')
+  @Get('/')
   index() {
     this.ctx.render(Index)
   }
 
-  @D.Get('/person/:userid')
+  @Get('/person/:userid')
   person() {
     this.ctx.render(Person)
   }
 
-  @D.Get('*')
+  @Get('*')
   notFount() {
     this.ctx.render(notFount)
   }
 }
-
-export default IndexController;

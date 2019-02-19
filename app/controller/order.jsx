@@ -1,22 +1,25 @@
-import D from 'bitorjs-decorators';
-
+import {
+  Controller,
+  Get,
+  Post,
+} from 'bitorjs-decorators';
 import Order from '../view/order';
 import Detail from '../view/detail';
 import notFount from '../view/404';
 
-@D.namespace('/order')
-class Controller {
+@Controller('/order')
+export default class {
   constructor(ctx) {
     this.ctx = ctx;
     this.bug = false;
   }
 
-  @D.Get('/')
+  @Get('/')
   index() {
     this.ctx.render(Order)
   }
 
-  @D.Get('/detail/:id')
+  @Get('/detail/:id')
   renderApp() {
     let params = this.ctx.params;
     console.log('detail...', params)
@@ -24,7 +27,7 @@ class Controller {
   }
 
   //get *
-  @D.Get('/*')
+  @Get('/*')
   notFount() {
     this.ctx.render(notFount)
   }
@@ -35,4 +38,3 @@ class Controller {
 
 }
 
-export default Controller;
