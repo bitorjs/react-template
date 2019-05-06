@@ -2,7 +2,7 @@ import {
   Controller,
   Get,
   Post,
-} from 'bitorjs-decorators';
+} from 'bitorjs';
 import Index from '../view/index';
 import Person from '../view/person';
 import notFount from '../view/404';

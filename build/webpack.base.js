@@ -4,7 +4,7 @@ const autoprefixer = require('autoprefixer');
 
 var path = require('path');
 const cwd = process.cwd();
-
+// const babel = require(path.join(cwd, '.babelrc.js'));
 
 
 module.exports = {
@@ -26,24 +26,25 @@ module.exports = {
 
   module: {
     rules: [{
-        test: /\.(js|jsx)$/,
-        // exclude: /node_modules/,
-        loader: "babel-loader"
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
-            outputPath: 'assets/' // 图片打包后存放的目录
-          }
-        }]
-      },
-      {
-        test: /\.(eot|ttf|woff|svg)$/,
-        use: 'file-loader'
-      }
+      test: /\.(js|jsx)$/,
+      // exclude: /node_modules/,
+      loader: "babel-loader",
+      // options: babel
+    },
+    {
+      test: /\.(jpe?g|png|gif)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 8192, // 小于8k的图片自动转成base64格式，并且不会存在实体图片
+          outputPath: 'assets/' // 图片打包后存放的目录
+        }
+      }]
+    },
+    {
+      test: /\.(eot|ttf|woff|svg)$/,
+      use: 'file-loader'
+    }
     ]
   }
 }

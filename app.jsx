@@ -1,5 +1,5 @@
 import 'normalize.css';
-import ReactApplication from './inject';
+import ReactApplication from 'bitorjs/react';
 import start from './app/view/start'
 
 let client = app => {
@@ -9,4 +9,4 @@ let client = app => {
   })
 }
 
-new ReactApplication().start(client, null, start);
+new ReactApplication({}, start).start(client, null, start);

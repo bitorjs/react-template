@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./build/webpack.dev.js --watch --color --progress",
     "dev": "webpack --mode=development --config ./build/webpack.dev.js --watch --progress --color",
-    "build": "webpack --mode=production --config ./build/webpack.prod.js --progress --color"
+    "build": "webpack --mode=production --config ./build/webpack.prod.js --progress --color",
+    "push": "git add . && git commit -m 'update' && npm version patch && git push"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bitorjs": "0.0.19",
     "bitorjs-application": "^1.0.9",
     "bitorjs-decorators": "^1.0.1",
     "bitorjs-store": "^1.0.3",
@@ -64,6 +66,7 @@
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-export-namespace-from": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",

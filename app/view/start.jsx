@@ -11,34 +11,28 @@ const ThemeContext = React.createContext({
   color: 'white'
 });
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this, ThemeContext)
-  }
+export default function (props) {
 
-  render() {
-    return (
-      <ThemeContext.Provider value={{ background: 'green', color: 'white' }}>
-        <PageRootContainer>
-          <Header border>头部</Header>
-          <ThemeContext.Consumer>
-            {(provider) => {
-              console.log(provider)
-              return (<button
-                style={{ backgroundColor: provider.background }}>
-                Toggle Theme
+  return (
+    <ThemeContext.Provider value={{ background: 'green', color: 'white' }}>
+      <PageRootContainer>
+        <Header border>头部</Header>
+        <ThemeContext.Consumer>
+          {(provider) => {
+            console.log(provider)
+            return (<button
+              style={{ backgroundColor: provider.background }}>
+              Toggle Theme
             </button>
-              )
-            }
+            )
+          }
+          }
+        </ThemeContext.Consumer>
+        <Tab></Tab>
+        {React.Children.only(props.children)}
+      </PageRootContainer>
+    </ThemeContext.Provider>
 
-            }
-          </ThemeContext.Consumer>
-          <Tab></Tab>
-          {React.Children.only(this.props.children)}
-        </PageRootContainer>
-      </ThemeContext.Provider>
+  )
 
-    )
-  }
 }

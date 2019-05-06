@@ -4,19 +4,15 @@ import PageRootContainer from '../components/page-root-container';
 
 import './styles/index.less'
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props)
-  }
+export default function (props) {
 
-  render() {
-    return (
-      <PageRootContainer>
-        <PageContainer>
-          详情 - {this.props.id}
-        </PageContainer>
-      </PageRootContainer>
-    )
-  }
+
+  return (
+    <PageRootContainer>
+      <PageContainer>
+        详情 - {props.id}
+      </PageContainer>
+    </PageRootContainer>
+  )
+
 }

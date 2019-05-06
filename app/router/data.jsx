@@ -3,10 +3,10 @@ import {
   Get,
   Post,
   Delete
-} from 'bitorjs-decorators';
+} from 'bitorjs';
 
 @Controller('/api')
-class IndexController {
+export default class {
   constructor(ctx) {
     this.ctx = ctx;
   }
@@ -42,5 +42,3 @@ class IndexController {
     ]
   }
 }
-
-export default IndexController;
